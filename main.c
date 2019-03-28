@@ -5,6 +5,7 @@
 
 void rellenarConjunto(char conj[7], char u[20]);
 void imprimirConjunto(char conj[], int c, char name[]);
+void ordenarConjunto(char conj[7]);
 
 int main(){
 	srand(time(NULL));
@@ -20,6 +21,10 @@ int main(){
 	rellenarConjunto(conj1, univ);
 	rellenarConjunto(conj2, univ);
 	rellenarConjunto(conj3, univ);
+	
+	ordenarConjunto(conj1);
+	ordenarConjunto(conj2);
+	ordenarConjunto(conj3);
 
 	imprimirConjunto(conj1, 7, "c1");
 	imprimirConjunto(conj2, 7, "c2");
@@ -63,6 +68,19 @@ void imprimirConjunto(char conj[], int c, char name[]){
 		i++;
 	}
 	printf("}\n");
+}
+
+void ordenarConjunto(char conj[7]){
+	char tmp = 'a';
+	for (int i=0; i < 7 && conj[i]!=NULL; i++){
+		for (int j=0; j < 7 && conj[i]!=NULL; j++){
+			if (conj[j] > conj[i]){
+				tmp = conj[i];
+				conj[i] = conj[j];
+				conj[j] = tmp;
+			}  
+		}
+	}
 }
 
 void menu(){
