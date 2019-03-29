@@ -87,6 +87,10 @@ void ordenarConjunto(char conj[], int len){
 	}
 }
 
+void unionConj(char conj1[], char conj2[], char res[]){
+	
+}
+
 void menu(){
 	printf("Que deseas hacer?\n");
 	printf("1-Mostrar Conjunto Universo\n");
