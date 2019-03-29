@@ -5,7 +5,7 @@
 
 void rellenarConjunto(char conj[7], char u[20]);
 void imprimirConjunto(char conj[], int c, char name[]);
-void ordenarConjunto(char conj[7]);
+void ordenarConjunto(char conj[], int len);
 
 int main(){
 	srand(time(NULL));
@@ -21,10 +21,14 @@ int main(){
 	rellenarConjunto(conj1, univ);
 	rellenarConjunto(conj2, univ);
 	rellenarConjunto(conj3, univ);
+
+	imprimirConjunto(conj1, 7, "c1");
+	imprimirConjunto(conj2, 7, "c2");
+	imprimirConjunto(conj3, 7, "c3");
 	
-	ordenarConjunto(conj1);
-	ordenarConjunto(conj2);
-	ordenarConjunto(conj3);
+	ordenarConjunto(conj1, 7);
+	ordenarConjunto(conj2, 7);
+	ordenarConjunto(conj3, 7);
 
 	imprimirConjunto(conj1, 7, "c1");
 	imprimirConjunto(conj2, 7, "c2");
@@ -37,7 +41,7 @@ int main(){
 void rellenarConjunto(char conj[7], char u[20]){
 	int temp = 0;
 	for(int i=0; i<7; i++){
-		conj[i] = NULL;
+		conj[i] = 126;
 	}
 
 	for(int i=0; i<7; i++){
@@ -47,7 +51,7 @@ void rellenarConjunto(char conj[7], char u[20]){
 		}
 		for(int j=0; j<i; j++){
 			if(conj[j]==u[temp]){
-				conj[i] = NULL;
+				conj[i] = 126;
 				i=7;
 				j=7;
 			} else{
@@ -60,9 +64,9 @@ void rellenarConjunto(char conj[7], char u[20]){
 void imprimirConjunto(char conj[], int c, char name[]){
 	int i = 0;
 	printf("%s = {", name);
-	while(conj[i]!=NULL && i<c){
+	while(conj[i]!=126 && i<c){
 		printf("%c", conj[i]);
-		if(i<c-1 && conj[i+1]!=NULL){
+		if(i<c-1 && conj[i+1]!=126){
 			printf(", ");
 		}
 		i++;
@@ -70,10 +74,10 @@ void imprimirConjunto(char conj[], int c, char name[]){
 	printf("}\n");
 }
 
-void ordenarConjunto(char conj[7]){
+void ordenarConjunto(char conj[], int len){
 	char tmp = 'a';
-	for (int i=0; i < 7 && conj[i]!=NULL; i++){
-		for (int j=0; j < 7 && conj[i]!=NULL; j++){
+	for (int i=0; i < len; i++){
+		for (int j=0; j < len; j++){
 			if (conj[j] > conj[i]){
 				tmp = conj[i];
 				conj[i] = conj[j];
