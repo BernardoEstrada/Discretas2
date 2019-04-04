@@ -36,8 +36,8 @@ int main(){
 	imprimirConjunto(conj3, 7, "c3");
 	imprimirConjunto(univ, 20, "U");
 	
-	interseccionConj(conj1, conj2);
-	interseccionConj(conj1, conj3);
+	diferenciaConj(conj1, conj2);
+	diferenciaConj(conj1, conj3);
 	
 	return 0;
 }
