@@ -2,10 +2,15 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <stdbool.h>
 
 void rellenarConjunto(char conj[7], char u[20]);
 void imprimirConjunto(char conj[], int c, char name[]);
 void ordenarConjunto(char conj[], int len);
+void eliminarDuplicados(char conj[], int len);
+void unionConj(char conjA[], char conjB[]);
+void interseccionConj(char conjA[], char conjB[]);
+void menu();
 
 int main(){
 	srand(time(NULL));
@@ -21,10 +26,6 @@ int main(){
 	rellenarConjunto(conj1, univ);
 	rellenarConjunto(conj2, univ);
 	rellenarConjunto(conj3, univ);
-
-	imprimirConjunto(conj1, 7, "c1");
-	imprimirConjunto(conj2, 7, "c2");
-	imprimirConjunto(conj3, 7, "c3");
 	
 	ordenarConjunto(conj1, 7);
 	ordenarConjunto(conj2, 7);
@@ -34,6 +35,9 @@ int main(){
 	imprimirConjunto(conj2, 7, "c2");
 	imprimirConjunto(conj3, 7, "c3");
 	imprimirConjunto(univ, 20, "U");
+	
+	interseccionConj(conj1, conj2);
+	interseccionConj(conj1, conj3);
 	
 	return 0;
 }
@@ -97,19 +101,65 @@ void eliminarDuplicados(char conj[], int len){
 	}
 }
 
-void unionConj(char conj1[], char conj2[]){
+void unionConj(char conjA[], char conjB[]){
 	char res[20];
 	int i;
+	for(i=0; i<20; i++){
+	    res[i]=126;
+	}
 	for (i = 0; i < 7; i++) {
-		res[i] = conj1[i];
+		res[i] = conjA[i];
 	}
-	for (; i < 14; i++) {
-		res[i] = conj2[i];
+	for (i; i < 14; i++) {
+		res[i] = conjB[i-7];
 	}
-	ordenarConjunto(res, 20);
 	eliminarDuplicados(res, 20);
-	imprimirConjunto(res, 20, "Union")
+	ordenarConjunto(res, 20);
+	imprimirConjunto(res, 20, "Union");
 
+}
+
+void interseccionConj(char conjA[], char conjB[]){
+    char res[20];
+	for(int i=0; i<20; i++){
+	    res[i]=126;
+	}
+    for(int i=0; i<7;i++){
+        for(int j=0;j<7;j++){
+            if(conjA[i]==conjB[j]){
+                res[i]=conjA[i];
+            }
+        }
+    }
+    printf("\n");
+    eliminarDuplicados(res, 20);
+    ordenarConjunto(res, 20);
+    imprimirConjunto(res, 20, "Interseccion");
+}
+
+void diferenciaConj(char conjA[], char conjB[]){
+    char res[20];
+    bool found = false;
+	for(int i=0; i<20; i++){
+	    res[i]=126;
+	}
+    for(int i=0; i<7;i++){
+        for(int j=0;j<7;j++){
+            if(conjA[i]==conjB[j]){
+                found = true;
+                j = 7;
+            }
+        }
+        if(!found){
+        	res[i] = conjA[i];
+        }
+        found = false;
+
+    }
+    printf("\n");
+    eliminarDuplicados(res, 20);
+    ordenarConjunto(res, 20);
+    imprimirConjunto(res, 20, "Diferencia");
 }
 
 void menu(){
