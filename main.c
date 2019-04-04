@@ -87,8 +87,29 @@ void ordenarConjunto(char conj[], int len){
 	}
 }
 
-void unionConj(char conj1[], char conj2[], char res[]){
-	
+void eliminarDuplicados(char conj[], int len){
+	for (int i = 0; i < len; i++){
+		for (int j = 0; j < len; j++){
+			if(conj[i]==conj[j]){
+				conj[j]==126;
+			}
+		}
+	}
+}
+
+void unionConj(char conj1[], char conj2[]){
+	char res[20];
+	int i;
+	for (i = 0; i < 7; i++) {
+		res[i] = conj1[i];
+	}
+	for (; i < 14; i++) {
+		res[i] = conj2[i];
+	}
+	ordenarConjunto(res, 20);
+	eliminarDuplicados(res, 20);
+	imprimirConjunto(res, 20, "Union")
+
 }
 
 void menu(){
