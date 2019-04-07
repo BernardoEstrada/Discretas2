@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 #include <stdbool.h>
 
 void rellenarConjunto(char conj[7], char u[20]);
@@ -36,8 +37,9 @@ int main(){
 	imprimirConjunto(conj3, 7, "c3");
 	imprimirConjunto(univ, 20, "U");
 	
-	diferenciaConj(conj1, conj2);
-	diferenciaConj(conj1, conj3);
+	complemento(conj1, univ, "a");
+	complemento(conj2, univ, "b");
+	complemento(conj3, univ, "c");
 	
 	return 0;
 }
@@ -131,7 +133,6 @@ void interseccionConj(char conjA[], char conjB[]){
             }
         }
     }
-    printf("\n");
     eliminarDuplicados(res, 20);
     ordenarConjunto(res, 20);
     imprimirConjunto(res, 20, "Interseccion");
@@ -156,10 +157,37 @@ void diferenciaConj(char conjA[], char conjB[]){
         found = false;
 
     }
-    printf("\n");
     eliminarDuplicados(res, 20);
     ordenarConjunto(res, 20);
     imprimirConjunto(res, 20, "Diferencia");
+}
+
+void complemento(char conjA[], char conjU[], char name[]){
+	char res[20];
+    bool found = false;
+	for(int i=0; i<20; i++){
+	    res[i]=126;
+	}
+    for(int i=0; i<20;i++){
+        for(int j=0;j<7;j++){
+            if(conjU[i]==conjA[j]){
+                found = true;
+                j = 7;
+            }
+        }
+        if(!found){
+        	res[i] = conjU[i];
+        }
+        found = false;
+
+    }
+    eliminarDuplicados(res, 20);
+    ordenarConjunto(res, 20);
+    imprimirConjunto(res, 20, strcat(name, " complemento"));
+}
+
+void conjPot(){
+	
 }
 
 void menu(){
