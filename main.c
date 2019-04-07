@@ -11,6 +11,12 @@ void ordenarConjunto(char conj[], int len);
 void eliminarDuplicados(char conj[], int len);
 void unionConj(char conjA[], char conjB[]);
 void interseccionConj(char conjA[], char conjB[]);
+void diferenciaConj(char conjA[], char conjB[]);
+void complemento(char conjA[], char conjU[], char name[]);
+void conjuntoPotencia(char conj[7]);
+void productoCartesiano(char conjA[7], char conjB[7]);
+void subconjunto(char conjA[], char conjB[]);
+void subconjuntoProp(char conjA[], char conjB[]);
 void menu();
 
 int main(){
@@ -185,9 +191,95 @@ void complemento(char conjA[], char conjU[], char name[]){
     ordenarConjunto(res, 20);
     imprimirConjunto(res, 20, strcat(name, " complemento"));
 }
+void conjuntoPotencia(char conj[7])
+{
+    int numberOf=0;
+    for(int x=0; x<7; x++)
+    {
+        if(conj[x]!=126)
+        {
+            numberOf++;
+        }
+    }
+    int totalNum = pow(2,numberOf);
+    printf("El conjunto tiene 2^%d = %d de posibles combinaciones\n",numberOf,totalNum);
+}
+void productoCartesiano(char conjA[7], char conjB[7])
+{
+    printf("{ ");
+    for(int i = 0; i<7; i++)
+    {
+        if(conjA[i]!=126)
+        {
+            for(int j = 0; j<7; j++)
+            {
+                if(conjB[j]!=126)
+                {
+                    printf("(%c,%c),",conjA[i],conjB[j]);
+                }
+            }
+            printf("\n");
+        }
+    }
+    printf(" }\n");
 
-void conjPot(){
-	
+}
+
+void subconjunto(char conjA[], char conjB[]){
+	bool found = false, comp = true;
+	for(int i=0; i<7; i++){
+		found = false;
+		for(int j=0; j<7; j++){
+			if(conjA[i]==conjB[j]){
+				found = true;
+				j=7;
+			}
+		}
+		if(!found){
+			comp = false;
+			i=7;
+		}
+	}
+	if(comp){
+		printf("El conjunto A es complemento de el conjunto B");
+	} else{
+		printf("El conjunto A no es complemento de el conjunto B");
+	}
+}
+void subconjuntoProp(char conjA[], char conjB[]){
+	bool found = false, comp = true;
+	for(int i=0; i<7; i++){
+		found = false;
+		for(int j=0; j<7; j++){
+			if(conjA[i]==conjB[j]){
+				found = true;
+				j=7;
+			}
+		}
+		if(!found){
+			comp = false;
+			i=7;
+		}
+	}
+	for(int i=0; i<7; i++){
+		found = false;
+		for(int j=0; j<7; j++){
+			if(conjB[i]==conjA[j]){
+				found= true;
+				j=7;
+			}
+		}
+		if(!found){
+			comp = true;
+			i=7;
+		}
+	}
+	if(comp){
+		printf("El conjunto A es complemento propio de el conjunto B");
+	} else{
+		printf("El conjunto A no es complemento propio de el conjunto B");
+	}
+
 }
 
 void menu(){
